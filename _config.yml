@@ -9,12 +9,12 @@ exclude:
   - "/vendor/"
 
 # Site settings
-title: danaING
-subtitle: "현재진행형"
+title: 단코딩 블로그
+subtitle: 조금씩 꾸준히
 email: danahkim@yonsei.ac.kr
 name: Danaing
 description: >
-  A simple yet classy theme for your Jekyll website or blog.
+  danaing's blog.
 # Base URL of site (i.e. /blog). It should always start with a slash,
 # and never end with a slash. Set it to a blank value if hosting at the
 # root of your server.
@@ -78,14 +78,14 @@ descriptions:
 social:
   - name: Twitter
     icon: twitter
-    username: TheBenCentra
-    url: https://twitter.com/TheBenCentra
+    username:
+    url: ""
     desc: Follow me on Twitter
-    share: true
+    share: false
 
   - name: Facebook
     icon: facebook
-    username: thebencentra
+    username:
     url: ""
     desc: Friend me on Facebook
     share: false
@@ -99,17 +99,17 @@ social:
 
   - name: LinkedIn
     icon: linkedin
-    username: Ben Centra
-    url: https://www.linkedin.com/pub/ben-centra/47/769/60a
+    username:
+    url: ""
     desc: Connect with me on LinkedIn
-    share: true
+    share: false
 
   - name: Google+
     icon: google-plus
     username: ""
     url: ""
     desc: Add me to your Circles
-    share: true
+    share: false
 
   - name: YouTube
     icon: youtube
@@ -130,7 +130,7 @@ social:
     username: ""
     url: ""
     desc: Follow me on Pinterest
-    share: true
+    share: false
 
   - name: SoundCloud
     icon: soundcloud
