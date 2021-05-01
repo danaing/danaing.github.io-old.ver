@@ -47,7 +47,7 @@ jekyll-archives:
     tag: '/tag/:name/'
 
 # Disqus comments
-# disqus_shortname: bencentra
+disqus_shortname: danaing-github-io
 
 # Google analytics
 # ga_tracking_id: "UA-XXXX-1"
@@ -81,28 +81,28 @@ social:
     username:
     url: ""
     desc: Follow me on Twitter
-    share: false
+    share: true
 
   - name: Facebook
     icon: facebook
     username:
     url: ""
     desc: Friend me on Facebook
-    share: false
+    share: true
 
   - name: GitHub
     icon: github
     username: danaing
     url: https://github.com/danaing
     desc: Fork me on GitHub
-    share: true
+    share: false
 
   - name: LinkedIn
     icon: linkedin
     username:
     url: ""
     desc: Connect with me on LinkedIn
-    share: false
+    share: true
 
   - name: Google+
     icon: google-plus
@@ -120,7 +120,7 @@ social:
 
   - name: Instagram
     icon: instagram
-    username: ""
+    username:
     url: ""
     desc: Follow me on Instagram
     share: false
@@ -179,7 +179,7 @@ social:
     username: ""
     url: ""
     desc: Share to Reddit
-    share: true
+    share: false
 
   - name: "Hacker News"
     icon: hacker-news
