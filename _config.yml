@@ -3,18 +3,20 @@
 plugins:
   - jekyll-archives # Sorry, not GitHub pages friendly!
   - jekyll-sitemap
-  - jekyll-paginate-v2
+  # - jekyll-paginate-v2
+  - jekyll-paginate
 
 exclude:
   - "/vendor/"
 
 # Site settings
-title: 단코딩 블로그
-subtitle: 조금씩 꾸준히
+title: danah's blog
+subtitle: study statistics, AI and coding.
 email: danahkim@yonsei.ac.kr
-name: Danaing
+name: danaing
 description: >
-  danaing's blog.
+  danah's blog
+
 # Base URL of site (i.e. /blog). It should always start with a slash,
 # and never end with a slash. Set it to a blank value if hosting at the
 # root of your server.
@@ -49,7 +51,7 @@ jekyll-archives:
     tag: '/tag/:name/'
 
 # Disqus comments
-# disqus_shortname: danaing-github-io
+disqus_shortname: danaing-github-io
 
 # Google analytics
 # ga_tracking_id: "UA-XXXX-1"
