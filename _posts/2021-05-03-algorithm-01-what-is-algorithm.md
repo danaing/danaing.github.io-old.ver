@@ -55,7 +55,7 @@ cover:  "/assets/covers/algorithm.png"
 
 #### 1. 코드를 읽는 눈을 기르려고
 
-<img src="/assets/images/bertsumsrc.png" width="30%" >
+<img src="/assets/images/bertsumsrc.png" width="30%">
 <center> <small> Github 내 Bertsum 소스코드 중 일부 </small> </center> <br/>
 
 작년에 딥러닝 분석을 위해 소스 코드를 뜯어보고 수정 적용할 일이 있었습니다. 저자의 깃헙 레포에서 여러가지 model source 코드와 preprocess 등의 코드를 목적에 맞게 고쳐야했습니다만... 남의 코드를 읽고 이해해서 목적에 맞게 고치는 일이 쉽지 않습니다. 기본기를 다지고 프로그래밍 연습을 통해 구조적으로 빨리 읽고 이해하는 능력이 필요하다고 느꼈습니다.
