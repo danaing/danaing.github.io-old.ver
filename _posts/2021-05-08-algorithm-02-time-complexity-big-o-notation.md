@@ -4,7 +4,7 @@ title:  "[Algorithm] 2. 시간 복잡도와 빅오 표기법(Time complexity and
 date:   2021-05-08
 author: danahkim
 tags: Algorithm
-categories: Algorithm
+categories: Programming
 cover:  "/assets/covers/algorithm.png"
 ---
 <!-- for mathjax -->
@@ -12,6 +12,9 @@ cover:  "/assets/covers/algorithm.png"
 	MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
 </script>
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script> -->
+
+데이터 분석가가 공부하는 알고리즘과 자료구조👩‍💻👨‍💻
+=============
 
 ## 0. 들어가며
 
