@@ -26,7 +26,7 @@ Class material과 제가 푼 exercise는 제 [Github 링크](https://github.com/
 
 > "We built a super simple neural network that fit data like an x and y data onto a line but that was just **"Hello, World"**. Right, Andrew? So fitting straight lines seems like the "Hello, world" most basic implementation learning algorithm."
 
-머신러닝와 딥러닝에 대한 개요를 설명합니다. 컴퓨터 언어를 배우기 시작할 때 으레 그 **세계 입문 의식**으로 `Hello, World!`를 먼저 프린트하곤 합니다. 마찬가지로 머신러닝의 세계에 입문할 때는 x와 y의 simple linear regression을 먼저 fitting하는 것이 'Hello, World!'와 같다는 담화가 인상깊었습니다.
+먼저 머신러닝와 딥러닝에 대한 개요를 설명합니다. 컴퓨터 언어를 배우기 시작할 때 으레 그 **세계 입문 의식**으로 `Hello, World!`를 먼저 프린트하곤 합니다. 마찬가지로 머신러닝의 세계에 입문할 때는 x와 y의 simple linear regression을 먼저 fitting하는 것이 'Hello, World!'와 같다는 담화가 인상깊었습니다.
 
 아래와 같은 $x$와 $y$의 1차 선형 관계가 있을 때, Neural Net 1개에 fitting하여 Simple Linear Regression문제를 해결해보겠습니다.
 
@@ -34,7 +34,7 @@ $$
 y = 0.5x + 0.5
 $$
 
-TensorFlow는 Keras의 Sequential을 사용하여 Neural Networks를 간단히 구현할 수 있습니다. Optimizer와 loss, epoch을 지정하고 주어진 데이터셋에 fitting합니다.
+TensorFlow는 Keras의 Sequential을 사용하여 Neural Networks Model을 한줄로 간단히 구현할 수 있습니다. *(저는 이게 이 주차의 이름인 '새로운 프로그래밍 패러다임'을 뜻하는 것 같습니다.)* Optimizer와 loss, epoch을 지정하고 주어진 데이터셋에 fitting합니다.
 
 ```python
 import tensorflow as tf
@@ -135,7 +135,7 @@ Convolutions를 추가한 Neural Network의 궁극적인 컨셉은 **구체적�
 
 또한 kernel 안에서 가장 큰 값만 가져오는 **MaxPooling**을 사용하여 강조 효과를 볼 수 있습니다.
 ![](/assets/images/2021-05-17-coursera--057e5d56.png)
-<center> <small> 출처: https://www.youtube.com/watch?v=8oOgPUO-TBY&list=PLkDaE6sCZn6Gl29AoE31iwdVwSG-KnDzF&index=9 </small> </center> <br/>
+<center> <small> 출처: https://youtu.be/8oOgPUO-TBY </small> </center> <br/>
 
 ```Python
 import tensorflow as tf
@@ -185,12 +185,12 @@ Coursera에  Convolutional Neural Networks (Course 4 of the Deep Learning Specia
 ![](/assets/images/2021-05-17-coursera--56e1f522.png)
 <center> <small> horse-or-human dataset </small> </center> <br/>
 
-위 이미지를 보면 다른 색깔, 다른 생김새의 말과 다른 자세를 취한 여러 인물 사진이 있습니다. 심지어 말의 다리가 3개만 나온 것도 있고, 사람 다리가 중간까지만 나온 것도 있습니다. 이 이미지를 가지고 binary-classification을 해보겠습니다.
+위 이미지를 보면 다른 색깔, 다른 생김새의 말과 다른 성별과 외모, 다양한 자세를 취한 여러 인물 사진이 있습니다. 심지어 말의 다리가 3개만 나온 것도 있고, 사람 다리가 중간까지만 나온 것도 있습니다. 이 이미지를 가지고 binary-classification을 해보겠습니다.
 
 첫번째 할일은 바로 '쉽게' 어떤 이미지가 사람이고 말인지 labeling하는 것입니다. TensorFlow에 **ImageDataGenerator**라는 유용한 클래스가 있습니다. 우리가 분류 모형을 만들 때 class에 대한 labeling이 필요한데, 이미지에 대한 labeling을 subdirectory를 사용하여 쉽게 도와주는 것입니다.
 
 ![](/assets/images/2021-05-17-coursera--a6d86419.png)
-<center> <small> 출처: https://www.youtube.com/watch?v=0kYIZE8Gl90&list=PLOU2XLYxmsII9mzQ-Xxug4l2o04JBrkLV&index=7 </small> </center> <br/>
+<center> <small> 출처: https://youtu.be/0kYIZE8Gl90 </small> </center> <br/>
 
 위의 directory 구조를 보면, Training 안에 Horses와 Humans라는 directory가 있고 그 안에 이미지가 있습니다. 이렇게 ImageDataGenerator는 directory 이름에 따라 자동으로 labeling을 해줍니다. 코드는 아래와 같습니다.
 
@@ -264,10 +264,46 @@ history = model.fit(
 
 ```
 
-옵티마이져로 Adam대신 RMSprop 를 사용하였는데, Learning Rate를 Gradient Descent방법에 따라 바꾸어주는 방법입니다. 더 알고 싶다면 아래 링크를 참고해주세요. (Gradient Descent in Practice II Learning Rate by Andrew Ng: <https://goo.gle/3bQvJgM> )
+옵티마이져로 Adam대신 RMSprop 를 사용하였는데, 이는 Learning Rate를 Gradient Descent방법에 따라 바꾸어주는 방법입니다. 더 알고 싶다면 아래 링크를 참고해주세요. (Gradient Descent in Practice II Learning Rate by Andrew Ng: <https://goo.gle/3bQvJgM> )
 
-모델 학습이 끝나고, Validation을 해볼 수 있습니다. 어디서 inference가 잘못됐는지 보고 train data를 수정해서 over-fitting 등의 오류를 방지할 수 있습니다.
+모델 학습이 끝나고, 직접 이미지를 업로드해서 Prediction 해볼 수 있습니다. 이 과정을 통해 어디서 inference가 잘못됐는지 보고 모델을 수정할 수 있습니다.
 
-epoch을 150으로 하면 train은 속도가 빠르지만, 다리가 나오지 않은 인물 사진은 말로 분류합니다. under-fitting이 된 것입니다. 이번에는 머리가 긴 여자의 사진은 말로 잘못 분류합니다. 이는 over-fitting의 문제입니다. 이럴 때는 모델 훈련을 다시 해야합니다. Data augutation을 사용해서 더 많은 이미지를 생성하여 학습하면 over-fitting을 방지할 수 있으며 이는 다음 강의에서 다뤄볼 예정입니다.
+```Python
+import numpy as np
+from google.colab import files
+from keras.preprocessing import image
+
+uploaded = files.upload()
+
+for fn in uploaded.keys():
+
+  # predicting images
+  path = '/content/' + fn
+  img = image.load_img(path, target_size=(300, 300))
+  x = image.img_to_array(img)
+  x = np.expand_dims(x, axis=0)
+
+  images = np.vstack([x])
+  classes = model.predict(images, batch_size=10)
+  print(classes[0])
+  if classes[0]>0.5:
+    print(fn + " is a human")
+  else:
+    print(fn + " is a horse")
+```
+![](assets/2021-05-17-coursera-introduction-to-tensorflow-598cd377.png)
+<center> <small> 6개의 이미지 Prediction 결과 (출처: https://youtu.be/0kYIZE8Gl90) </small> </center> <br/>
+
+위 코드를 사용해서 말 사진 3개, 사람 사진 3개를 테스트 한 결과, 말 사진 3개는 맞게 분류했지만, 아래 사람 사진을 horse라고 잘못 분류했습니다!
+
+![](assets/2021-05-17-coursera-introduction-to-tensorflow-dcbaf740.png)
+<center> <small> 오분류한 사람 사진 (출처: https://youtu.be/0kYIZE8Gl90) </small> </center> <br/>
+
+아마 긴 금발 머리의 특징이 훈련이 안되어 있을 수 있습니다. 또한 다리가 나오지 않은 인물 사진을 predict했을 때도 말로 오분류했습니다. 이는 train 데이터셋에만 Over-Fitting된 문제입니다. 이럴 때는 어디가 잘못 훈련되었는지 inference를 통해 모델을 다시 구성해야합니다. 또한 Data augutation을 사용해서 더 많은 이미지를 생성하여 학습하면 Over-Fitting을 방지할 수 있으며 이는 다음 강의에서 다뤄볼 예정입니다.
 
 -----------
+## Course Certificate
+
+![](assets/2021-05-17-coursera-introduction-to-tensorflow-5c92122e.png)
+
+이렇게 수료증을 발급받으면서 본 코스를 완강했습니다.👏 군더더기없는 현업 전문가(그것도 구글)의 강의로 개념을 정리하고 주어진 데이터셋으로 직접 실습 문제를 다룰 수 있습니다. DeepLearning.AI에서 제공하는 다른 강의도 수강할 예정입니다.
