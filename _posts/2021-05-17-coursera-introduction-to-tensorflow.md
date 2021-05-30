@@ -291,12 +291,12 @@ for fn in uploaded.keys():
   else:
     print(fn + " is a horse")
 ```
-![](assets/2021-05-17-coursera-introduction-to-tensorflow-598cd377.png)
+![](/assets/images/2021-05-17-coursera-introduction-to-tensorflow-598cd377.png)
 <center> <small> 6개의 이미지 Prediction 결과 (출처: https://youtu.be/0kYIZE8Gl90) </small> </center> <br/>
 
 위 코드를 사용해서 말 사진 3개, 사람 사진 3개를 테스트 한 결과, 말 사진 3개는 맞게 분류했지만, 아래 사람 사진을 horse라고 잘못 분류했습니다!
 
-![](assets/2021-05-17-coursera-introduction-to-tensorflow-dcbaf740.png)
+![](/assets/images/2021-05-17-coursera-introduction-to-tensorflow-dcbaf740.png)
 <center> <small> 오분류한 사람 사진 (출처: https://youtu.be/0kYIZE8Gl90) </small> </center> <br/>
 
 아마 긴 금발 머리의 특징이 훈련이 안되어 있을 수 있습니다. 또한 다리가 나오지 않은 인물 사진을 predict했을 때도 말로 오분류했습니다. 이는 train 데이터셋에만 Over-Fitting된 문제입니다. 이럴 때는 어디가 잘못 훈련되었는지 inference를 통해 모델을 다시 구성해야합니다. 또한 Data augutation을 사용해서 더 많은 이미지를 생성하여 학습하면 Over-Fitting을 방지할 수 있으며 이는 다음 강의에서 다뤄볼 예정입니다.
@@ -304,6 +304,6 @@ for fn in uploaded.keys():
 -----------
 ## Course Certificate
 
-![](assets/2021-05-17-coursera-introduction-to-tensorflow-5c92122e.png)
+![](/assets/images/2021-05-17-coursera-introduction-to-tensorflow-5c92122e.png)
 
 이렇게 수료증을 발급받으면서 본 코스를 완강했습니다.👏 군더더기없는 현업 전문가(그것도 구글)의 강의로 개념을 정리하고 주어진 데이터셋으로 직접 실습 문제를 다룰 수 있습니다. DeepLearning.AI에서 제공하는 다른 강의도 수강할 예정입니다.
