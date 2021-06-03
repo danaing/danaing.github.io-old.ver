@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[Conference] 2019년 추계 통계학술논문발표회 및 수상 후기 (Statistical Society Conference in Fall 19)"
+title:  "2019년 추계 통계학술논문발표회 및 수상 후기 (Statistical Society Conference in Fall 19)"
 date: 2019-11-30
 author: danahkim
 tags: Conference Nonparametric Change-point
@@ -16,7 +16,7 @@ categories: Statistics
 <img src="/assets/images/19-fall-statistics-conference-06.jpg" width="80%">
 <center> <small> 2019 한국통계학회 추계학술논문발표회 포스터 </small> </center> <br/>
 
-2019년 11월 8일~9일 양일간 가을 한국통계학회에서 주최하는 학술논문 발표회 및 정기충회(줄여서 통계학술대회)가 서울시립대학교에서 열렸습니다. 저는 학생 포스터 논문 발표로 학회에 참가하였습니다.
+2019년 11월 8일~9일 양일간 가을 한국통계학회에서 주최하는 학술논문 발표회 및 정기총회(줄여서 통계학술대회)가 서울시립대학교에서 열렸습니다. 저는 학생 포스터 논문 발표로 학회에 참가하였습니다.
 
 <img src="/assets/images/19-fall-statistics-conference-08.PNG" width="80%">
 <center> <small> 2019년 11월 8일 진행 일정 </small> </center> <br/>
