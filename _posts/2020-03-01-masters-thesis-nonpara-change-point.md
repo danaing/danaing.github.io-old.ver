@@ -1,0 +1,280 @@
+---
+layout: post
+title:  "Nonparametric methods for Change-point detection using empirical likelihood | 졸업연구논문"
+date:   2020-02-16
+author: danahkim
+tags: Nonparametric Change-point
+categories: Statistics
+---
+<!-- for mathjax -->
+<!-- <script type="text/x-mathjax-config">
+	MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script> -->
+
+## 0. Intro
+
+졸업 논문이 본심을 통과하면서 2년의 석사 과정을 마치게 되었습니다! 연구한 주제는 'Change-point detection using Nonparametric methods'입니다. 교수님의 지도 하에 쓴 졸업 논문에 대해 적어보려 합니다.
+
+
+## 1. Introduction
+
+### 1.1. Backgrounds of Change-point Problem
+
+<img src="/assets/images/2020-03-01-masters-thesis-nonpara-change-point-fde636c9.png" width="80%">
+<center> <small> 나일 강의 연간 유량의 데이터로 점선이 change-point를 의미함.</small> </center> <br/>
+
+먼저 **Change-point**란 무엇일까요? 단어 뜻 그대로 변화가 생기는 지점, 즉 **변동점**을 의미합니다. Change-point란 시간의 흐름에 따른 일련의 과정에서 근본적인 프로세스의 통계적인 속성이 변한 지점을 의미합니다. 금융이나 제조접, 역학 등의 분야와 많은 실제적인 상황에서 통계학자는 change-point가 발생했는지와 발생했다면 어디에서 발생했는지와 같은 문제에 봉착하곤 했습니다. W. A. Shewhart는 1931년에 처음으로 통계쩍 품질 관리, 즉 불량률 관리의 측면의 Control Chart를 개발하였고, E. S. Page는 1954년에 변화를 탐지하기 위해 CUSUM chart를 고안합니다. 즉 이러한 고민과 해결의 시도는 오래전부터 있었으며 이후 많은 연구들이 진행되었습니다.
+
+<img src="/assets/images/2020-03-01-masters-thesis-nonpara-change-point-3480ddda.png" width="80%">
+<center> <small> Control Chart for Standard Deviations of Sample of the Data </small> </center> <br/>
+
+
+### 1.2. Change-point Problem
+
+Change-point에 대한 정의는 다양합니다. 여기서 우리는 Change-point problem에 대해 이렇게 정의하겠습니다.
+
+Consider a sequence of
+observations $x_{1}, x_{2}, \ldots, x_{n}$ drawn from independent random variables $X_{1}, X_{2}, \ldots, X_{n}$
+
+Multiple $m$ change-points $\tau_{1}, \tau_{2}, \ldots , \tau_{m}$ exist in the data. Then there are $(m+1)$ segments.
+
+The distributions of the sequence can be written as
+
+$$
+X_{i} \sim \left\{ \begin{array}{ll}
+F_{1} & \textrm{if $i \le \tau_{1}$}\\
+F_{2} & \textrm{if $\tau_{1} < i \le \tau_{2}$}\\
+\ldots \\
+F_{m+1} & \textrm{if $\tau_{m} < i$}\\
+\end{array} \right.
+$$
+
+Change-point문제는 Change-point $\tau$ 가 $m$개 존재할 때, $m+1$개의 distribution으로 나눠진다는 가정하에 시작합니다. 이 때 구조의 변화는 크게 평균, 분산, 분포의 변화가 있습니다.
+
+
+### 1.3. Change-point Model
+
+Change-point detection을 위한 통계적 모델은 $\tau$에서 1개의 변화가 있다고 가정합니다. 이렇듯 single change-point를 구하는 바이너리한 segmentation을 연속적으로 수행하여 모든 change-point를 찾을 수 있습니다.
+
+Consider independent random variables $X_{1} \sim G_{1},\ldots,X_{n}\sim G_{n}$.
+
+Assume that there is at most one change $\tau$ in the sequence of distributions above. We want to test the null hypothesis of no change
+
+$$
+\label{test:h0}
+\mathbf{H_{0}} : G_{1} = G_{2} = \ldots = G_{n} = F,
+$$
+
+against the following alternative of one change
+
+$$
+\label{test:ha}
+\mathbf{H_{a}} : F_{1} = G_{1} = G_{2} = \ldots = G_{\tau} \ne G_{\tau+1} = \ldots = G_{n} = F_{2}.
+$$
+
+where $1 \le \tau < n$ and neither F nor G is degenerate.
+Using binary segmentation, it suffices to test and estimate the position of a single change point at each stage sequentially.
+
+
+## 2. Proposed Methodology
+
+### 2.1. Methods on change-point analysis
+
+Change-point를 탐지하는 방법은 크게 모수적 방법과 비모수적 방법으로 나눌 수 있습니다. 모수적 방법 중 연구가 가장 많이된 분야는 정규분포에서 평균의 변화에 대한 탐지이며 또한 분산의 변화에 대해서도 연구가 되고 있습니다. 그러나 모수적 방법에는 (1) 모수적 가정은 때때로 현실에서 만족되지 않으며 (2) 아웃라이어에 민감하고, (3) 극단에 위치한 값은 분포에 따라 크게 다르다는 한계점이 존재합니다.
+
+비모수적 방법은 가정이 훨씬 적으며 다양한 상황에 더 적절하게 사용할 수 있습니다. 전통적인 비모수적 방법 외에도 많은 연구가 되었으며, 2007년의 Empirical likelihood ratio를 이용한 change-point문제에 대한 논문<sup>[1](#footnote_1)</sup>과 2017년에 제안된 Quantile empirical likelihood을 방법<sup>[2](#footnote_2)</sup>을 발전시켜, 이번 논문은 양 방향으로의 double quantile empirical likelihood를 제안합니다.
+
+
+### 2.3. Empirical likelihood
+
+이 논문에서 이용한 방법론은 Empirical likelihood로 오웬이 비모수적 방법의 empirical likelihood를 처음 제시하였습니다.
+
+Empirical likelihood is a nonparametric method first introduced by Owen(1988). The main idea is to place an unknown probability mass at each observation.
+
+Assume that independently and identically distributed observation $x_{1}, ... ,x_{n}$ are from an unknown population distribution $F$. Let $p_{i} = P(X=x_{i})$. Empirical likelihood function of $\{p_{i}\}_{i=1}^{n}$ is defined as
+
+$$
+L(F) = \prod_{i=1}^{n} p_{i},
+$$
+
+where $p_{i}$ satisfy the constraints $p_{i} \ge 0$ and $\sum_{i=1}^{n} p_{i}=1$
+
+It is clear that $L(F)$ is maximized at $p_{i}=1/n$ and attains maximum $n^{-n}$ under the full nonparametric model.
+When a population parameter $\theta$ identified by $E[m(X;\theta)]=0$ is of interest, the empirical likelihood maximum when $\theta$ has the true value $\theta_{0}$ is obtained subject to the additional constraint
+
+$$
+\sum_{i=1}^{n} p_{i} m(x_{i},\theta_{0}) = 0.
+$$
+
+To find $\{p_{i}\}_{i=1}^{n}$ under the restrictions, solve the Laglange Multiplier
+
+$$
+\sum_{i=1}^{n} \log p_{i} + \lambda_{0} ( \sum_{i=1}^{n} p_{i} - 1) +  \lambda_{1} (\sum_{i=1}^{n} p_{i} m(x_{i},\theta_{0})).
+$$
+
+관심있는 모수에 대한 제약식을 추가하여 likelihood를 최대화하는 각 observation에 대한 probability를 추정할 수 있습니다.
+
+The ELR statistic to test $\theta = \theta_{0}$ is given by
+
+$$
+\mathbf{R(\theta_{0})} = \frac{L(F)}{L(F_{n})} = \max \left \{ \prod_{i=1}^{n} np_{i} | \sum_{i=1}^{n} p_{i}m(x_{i}, \theta_{0})=0, p_{i} \ge 0, \sum_{i=1}^{n} p_{i} =1 \right \}
+$$
+
+Under the null model $\theta = \theta_{0}$ with mild regular conditions, $-2 \log \mathbf{R(\theta_{0})} \to \chi_{r}^{2}$ in distribution as $n \to \infty$, where $r$ is dimension of $m(x, \theta)$ (Owen, 1988). The empirical likelihood method can be extended to other constraints using Lagrange multiplier method to find $\{p_{i}\}_{i=1}^{n}$.
+
+이렇듯 Empirical Likelihood Ratio를 구할 수 있으며, 이것은 근사적으로 chi-squared distribution을 따른다고 알려져있습니다. Empirical Likelihood 방법은 Lagrange Multiplier Method를 사용하여 다른 제약식으로 확장하여 probability를 추정할 수 있습니다.
+
+
+### 2.3. Empirical Likelihood for Two groups comparison
+
+2 group comparison test로 확장 가능합니다. $F_{1}$과 $F_{2}$의 probability를 최대로하는 empirical likelihood를 정의하면, 아래와 같이 two sample test로 change-point를 binary하게 2개의 분포로 나누는 test와 동일하게 됩니다.
+
+
+
+
+### 2.4. Quantile Llikelihood Ratio for Two Sample
+
+2017년의 논문에 따르면 여기에 Quantile을 이용한 constraints를 empirical likelihood에 추가하여 probability를 추정할 수 있습니다.
+
+Two samples: $X_{1}, X_{2}, \ldots, X_{n} \sim F_{1}$ and $Y_{1}, Y_{2}, \ldots, Y_{m} \sim F_{2}$ and let $p_{i} = P(X=x_{i})$ and $q_{j} = P(Y=y_{j})$.
+Empirical likelihood function of $\{p_{i}\}_{i=1}^{n}$, $\{q_{j}\}_{j=1}^{m}$ is defined as
+
+$$
+L(F) = \prod_{i=1}^{n} p_{i}\prod_{j=1}^{m} q_{j},
+$$
+
+where $p_{i}$ and $q_{j}$ satisfy the constraints $p_{i} \ge 0, q_{j} \ge 0$ and $\sum_{i=1}^{n} p_{i}=1$, $\sum_{j=1}^{m} q_{j}=1$
+
+This hypothesis (\ref{test:h0}) and (\ref{test:ha}) is equivalent to
+
+$$
+\mathbf{H_{0}} : F_{1} = F_{2},
+$$
+
+against
+
+$$
+\mathbf{H_{a}} : F_{1} \ne F_{2}.
+$$
+
+The hypothesis (\ref{two:h0}) and (\ref{two:ha}) becomes two sample test.
+
+이를 확장시켜 제가 제안하는 방법이 double quantile likelihood입니다. 앞서보았던 empirical likelihood에 left side와 right side의 quantile을 constraints로 사용하여 추정하는 방법입니다. 2개의 quantile을 사용하여 Empirical likelihood를 maximize하는 것입니다.
+
+Proposed methodology: Double quantile likelihood
+Expand (\ref{oneqt}) to \textbf{double quantile likelihood} for the both extreme side.
+Let $p=F(\xi_{p})$ and $1-q=F(\xi_{1-q})$ ; hence, $\xi_{p}$ is the $p$ quantile of $F$ and $\xi_{1-q}$ is the $1-q$ quantile of $F$. This satisfies
+
+$$
+E[I(X_{i} \le \xi_{p})-p]=0, \quad E[I(X_{i} \ge \xi_{1-q})-q)]=0
+$$
+
+where $0 < p < 1-q < 0$ for $1 \le i \le n+m$.
+
+Using , double quantile empirical likelihood test statistic under restriction is
+
+$$
+\mathbf{R(\xi_{p}, \xi_{1-q})} = \max \Bigg \{\prod_{i=1}^{n} np_{i} \prod_{j=1}^{m} mq_{j} | \sum_{i=1}^{n} p_{i} I(X_{i} \le \xi_{p}) )=p, \\
+\sum_{j=1}^{m} q_{j} I(Y_{j} \le \xi_{p}) )=p, \sum_{i=1}^{m} q_{i} I(X_{i} \le \xi_{1- q}) )=1-q, \\
+\sum_{j=1}^{m} q_{j} I(Y_{j} \le \xi_{1-q}) )=1-q, p_{i}, q_{j} \ge 0, \sum_{i=1}^{n} p_{i} = \sum_{j=1}^{m} q_{j} =1  \Bigg \}
+$$
+
+라그랑지 멀티플라이어를 통해 유니크한 람다를 구하고 이로 확률을 추정합니다. 따라서 유도되는 DLR는 위와 같습니다. 이때 이 test statistic을 최대화시키는 사이p와 사이1-q를 택하고, 큰 test statistic Dn은 가장 가능성이 큰 적어도 하나의 change-point가 있다는 뜻으로 귀무가설의 기각을 의미합니다. 증명은 Appendix.A에 수록되어 있습니다.
+
+
+Using Lagrange multipliers to solve (\ref{DLR}), we can get following unique $\lambda's$ and $\{p_{i}\}_{i=1}^{n}$, $\{q_{j}\}_{j=1}^{m}$. (Proof in Appendix.A) This leads to double quantile likelihood ratio(DLR) test statistic.
+
+$$
+\mathbf{R(\xi_{p}, \xi_{1-q})} = \left ( \frac{np}{n_{1}} \right )^{n_{1}} \left ( \frac{nq}{n_{2}} \right )^{n_{2}} \left ( \frac{n(1-p-q)}{n-n_{1}-n_{2}} \right )^{n-n_{1}-n_{2}} \\
+\left ( \frac{mp}{m_{1}} \right )^{m_{1}} \left ( \frac{mq}{m_{2}} \right )^{m_{2}} \left ( \frac{m(1-p-q)}{m-m_{1}-m_{2}} \right )^{m-m_{1}-m_{2}}
+$$
+
+where $\sum_{i=1}^{n} I(X_{i} \le \xi_{p}) = n_{1}$, $\sum_{i=1}^{n}I( X_{i} > \xi_{1-q}) = n_{2}$ and $\sum_{j=1}^{m} I(Y_{j} \le \xi_{p}) = m_{1}$, $\sum_{j=1}^{m}I( Y_{j} > \xi_{1-q}) = m_{2}$
+
+$$
+\therefore D_{n} = \sup_{\xi_{p}<\xi_{1-q}} \{ -2\log \mathbf{R(\xi_{p}, \xi_{1-q})} \}  
+$$
+
+Large values of $D_{n}$ indicate that there is at least one change-point.
+
+## 3. Simulations
+
+### 3.1. Algorithm for change-point detection
+
+소개해드린 DLR로 change-point를 detection하는 알고리즘에 대해 말씀드리겠습니다. Change-point $\tau$는 two sample test인 DLR를 통해 추정이 가능합니다. 이때 F1과 F2의 sample size가 작다면 EL의 estimator인 람다는 존재하지 않을 수도 있으므로, $n$과 $m$의 샘플사이즈는 2007는 Zou의 논문에서 제시한 trimming 방법을 사용하여 조정된 $D_{n}^{\*}$ 를 구하고, 계산된 $D_{n}^{\*}$ 를 가장 maximize시키는 $\tau$를  $\tau$으로 추정합니다.
+
+Change-point detection problem is to detect $\tau$ where
+
+$$
+F_{1} = G_{1} = G_{2} = \ldots = G_{\tau} \ne G_{\tau+1} = \ldots = G_{n} = F_{2}
+$$
+
+Two sample test: $X_{1}, \ldots, X_{n} \sim F_{1}$ and $Y_{1}, \ldots, Y_{m} \sim F_{2}$. When $n$ or $m$ is too small, the empirical likelihood estimators of $\lambda's$ may not exist. Therefore, use a trimmed statistic (Zou, C. (2007))
+
+$$
+D_{n}^{*} = \sup_{ c(n+m)^{-1/9}<\xi_{p}<\xi_{1-q}<1-c(n+m)^{-1/9} } \{ -2\log \mathbf{R(\xi_{p}, \xi_{1-q})} \}
+$$
+
+where $c$ is a positive constant.
+The location $\tau$ can be estimated by
+
+$$
+\hat\tau = \arg_{\tau} \max \{ D_{n}^{*} \}
+$$
+
+### 3.2. Simulation Results
+
+다음은 시뮬레이션입니다. Single change-point에 대해 시뮬레이션 수행하였습니다. 평균의 차이를 델타로 고정시키고 두 분포에서 observation값을 추출합니다. 그리고 change-point의 위치는 25%, 50%, 75%, 95%로 4개의 자리에 위치시켰습니다. 컴퓨팅을 고려하여 사이 $p$와 사이 $1-q$의 rank는 전체 샘플사이즈의 절반이상의 차이가 나도록 설정하였습니다. $D_{n}^{\*}$를 가장 크게 하는 $\tau$를 change-point로 택하는 시뮬레이션을 100번 수행하셨습니다.
+
+1. Assume that $X_{1}, ... ,X_{n}$ from $F_{1}$, and $Y_{1}, ... ,Y_{m}$ from $F_{2}$ with different distributions by setting $\delta$ satisfying $\delta=E_{F_{1}}(X)-E_{F_{2}}(X)$
+1. Change location $m$ takes 25\%, 50\%, 75\%, and 95\% quantiles of the number of samples.
+1. $\xi_{p}$ and $\xi_{1-q}$ are the value of $x's$ satisfying the rank($\xi_{p}$)-rank($\xi_{1-q}$) $\ge 0.5(n+m)$ for computation.
+1. Calculate $D_{n}^{*}$ and detect change-point $\hat\tau$.
+1. For each case, 100 simulations are carried out.
+1. Calculate the accuracy rate.
+
+
+<img src="/assets/images/2020-03-01-masters-thesis-nonpara-change-point-d2fd887e.png" width="80%">
+
+<img src="/assets/images/2020-03-01-masters-thesis-nonpara-change-point-143a683c.png" width="80%">
+
+<img src="/assets/images/2020-03-01-masters-thesis-nonpara-change-point-12890a3a.png" width="80%">
+
+
+Change-point 분석에 널리 연구된 Nile데이터에 실제 적용한 결과입니다. 왼쪽 plot은 DLR의 -2LLR입니다. max값인 28이 τ로 추정되었습니다. 이는 오른쪽의 plot을 보았을 때, 1899년까지와 그 이후의 유량은 눈으로도 차이가 보입니다. (논문에 따르면 1898년에 기후 변화와 nile강 주변 aswan dam의 개입으로 달라진것으로 보고 있습니다.)
+
+
+## 4. References
+
+* Chen, J. and Gupta, A. K. (2011).Parametric statistical change point analysis: with applicationsto genetics, medicine, and finance. Springer Science Business Media.
+* Jing, B.-Y. (1995). Two-sample empirical likelihood method.Statistics & probability letters, 24(4):315-319.
+* Owen, A. B. (1988).Empirical likelihood ratio confidence intervals for a single functional.Biometrika, 75(2):237-249.
+* Owen, A. B. (2001).Empirical likelihood. Chapman and Hall/CRC. * Ross, G. J. and Adams, N. M. (2012). Two nonparametric control charts for detecting arbitrary distribution changes. Journal of Quality Technology, 44(2):102-116.
+* Zhang, J. (2002). Powerful goodness-of-fit tests based on the likelihood ratio.Journal of the RoyalStatistical Society: Series B (Statistical Methodology), 64(2):281-294.
+* Zhang, J. (2006). Powerful two-sample tests based on the likelihood ratio.Technometrics, 48(1):95-103.
+* Zhou, Y., Fu, L., and Zhang, B. (2017). Two non parametric methods for change-point detectionin distribution.Communications in Statistics-Theory and Methods, 46(6):2801-2815.
+* Zou, C., Liu, Y., Qin, P., and Wang, Z. (2007). Empirical likelihood ratio test for the change-pointproblem.Statistics probability letters, 77(4):374-382.
+
+DLR 유도식과 Data application한 DLR와 QLR의 결과가 Appendix에 참고되어 있습니다. 감사합니다.
+
+2019년 10월 22일 연세대학교 대우관 본관에서 그동안 연구한 논문으로 졸업을 위한 논문의 예비심사가 이루어졌습니다. 당시 발표했던 자료를 첨부합니다.
+
+<embed src="/assets/images/NP_cpt_Preliminary_Evaluation.pdf" type="application/pdf" width="600px" height="450px" />
+
+
+
+----------------
+#### footnote
+
+<a name="footnote_1">1</a>: Zou, C., Liu, Y., Qin, P., and Wang, Z. (2007): Suggest Empirical
+likelihood ratio test for the change-point problem.
+
+<a name="footnote_2">2</a>: Zhou, Y., Fu, L., and Zhang, B. (2017): Based on two sample quantile empirical likelihood.
+
+----------------
+
+
+
+## 9. Outro
+선배들 졸업하실 때 본인의 졸업논문 앞 페이지에 편지를 적어서 주시곤 했습니다. 그동안 많은 졸업 논문을 받았었지만 한 권의 졸업 논문이 탄생하기 까지 얼마나 많은 노고가 있는지 절감했습니다. 생각한 대로 결과가 나오지 않을 때도 있고, 대개는 이미 현존하는 아이디어 일 때가 많았습니다.
