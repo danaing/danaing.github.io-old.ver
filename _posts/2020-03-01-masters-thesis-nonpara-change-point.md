@@ -23,7 +23,7 @@ categories: Statistics
 <img src="/assets/images/2020-03-01-masters-thesis-nonpara-change-point-fde636c9.png" width="80%">
 <center> <small> 나일 강의 연간 유량의 데이터로 점선이 change-point를 의미함.</small> </center> <br/>
 
-먼저 **Change-point**란 단어 뜻 그대로 변화가 생기는 지점, 즉 **변동점**을 의미합니다. Change-point란 시간의 흐름에 따른 일련의 과정에서 근본적인 프로세스의 통계적인 속성이 변한 지점을 의미합니다. 금융이나 제조접, 역학 등의 분야와 많은 실제적인 상황에서 통계학자는 change-point가 발생했는지와 발생했다면 어디에서 발생했는지와 같은 문제에 봉착하곤 했습니다. W. A. Shewhart는 1931년에 처음으로 통계쩍 품질 관리, 즉 불량률 관리의 측면의 Control Chart를 개발하였고, E. S. Page는 1954년에 변화를 탐지하기 위해 CUSUM chart를 고안합니다. 즉 이러한 고민과 해결의 시도는 오래전부터 있었으며 이후 많은 연구들이 진행되었습니다.
+먼저 **Change-point**란 단어 뜻 그대로 변화가 생기는 지점, 즉 **변동점**입니다. Change-point란 시간의 흐름에 따른 일련의 과정에서 근본적인 프로세스의 통계적인 속성이 변한 지점을 의미합니다. 금융이나 제조접, 역학 등의 분야와 많은 실제적인 상황에서 통계학자는 change-point가 발생했는지와 발생했다면 어디에서 발생했는지와 같은 문제에 봉착하곤 했습니다. W. A. Shewhart는 1931년에 처음으로 통계적 품질 관리, 즉 불량률 관리의 측면의 Control Chart를 개발하였고, E. S. Page는 1954년에 변화를 탐지하기 위해 CUSUM chart를 고안합니다. 이러한 고민과 해결의 시도는 오래전부터 있었으며 이후 많은 연구들이 진행되었습니다.
 
 <img src="/assets/images/2020-03-01-masters-thesis-nonpara-change-point-3480ddda.png" width="80%">
 <center> <small> Control Chart for Standard Deviations of Sample of the Data </small> </center> <br/>
@@ -31,10 +31,10 @@ categories: Statistics
 
 ### 1.2. Change-point Problem
 
-Change-point에 대한 정의는 다양합니다. 여기서 우리는 Change-point problem에 대해 이렇게 정의하겠습니다.
+Change-point Probelm에 대한 정의는 다양합니다만, 여기서 우리는 Change-point problem에 대해 이렇게 정의하겠습니다.
 
 Consider a sequence of
-observations $x_{1}, x_{2}, \ldots, x_{n}$ drawn from independent random variables $X_{1}, X_{2}, \ldots, X_{n}$
+observations $x_{1}, x_{2}, \ldots, x_{n}$ drawn from independent random variables $X_{1}, X_{2}, \ldots, X_{n}$.
 
 Multiple $m$ change-points $\tau_{1}, \tau_{2}, \ldots , \tau_{m}$ exist in the data. Then there are $(m+1)$ segments.
 
@@ -49,12 +49,11 @@ F_{m+1} & \textrm{if $\tau_{m} < i$}\\
 \end{array} \right.
 $$
 
-Change-point문제는 Change-point $\tau$ 가 $m$개 존재할 때, $m+1$개의 distribution으로 나눠진다는 가정하에 시작합니다. 이 때 구조의 변화는 크게 평균, 분산, 분포의 변화가 있습니다.
-
+즉 Change-point문제는 Change-point $\tau$가 $\tau_{1}$ 부터 $\tau_{m}$까지 $m$개 존재할 때, $F_{1}$부터 $F_{m+1}$까지 $m+1$개의 distribution으로 나눠진다는 가정 하에 시작합니다. 이 때 distribution의 structure 변화는 주로 평균이나 분산의 변화 혹은 분포의 자체의 변화로 볼 수 있습니다. 그리고 이 Change-point problem에서 $\tau$의 적절한 위치와 개수를 detection해야합니다.
 
 ### 1.3. Change-point Model
 
-Change-point detection을 위한 통계적 모델은 $\tau$에서 1개의 변화가 있다고 가정합니다. 이렇듯 single change-point를 구하는 바이너리한 segmentation을 연속적으로 수행하여 모든 change-point를 찾을 수 있습니다.
+Change-point problem에서 $\tau$의 *적절한 위치와 개수*를 detection 하기 위한 통계적 모델을 정의하겠습니다. 먼저 $\tau$에서 1개의 변화가 있다고 가정합니다. 이렇게 single change-point를 구하고, 나뉘어진 지점을 기준으로 앞 뒤로 binary한 segmentation을 연속적이고 반복적으로 수행하면 모든 change-point를 찾을 수 있습니다. 이를 표현하면 아래와 같이 single change-point를 detect하는 과정으로 단순화할 수 있습니다.
 
 Consider independent random variables $X_{1} \sim G_{1},\ldots,X_{n}\sim G_{n}$.
 
@@ -80,7 +79,7 @@ Using binary segmentation, it suffices to test and estimate the position of a si
 
 ### 2.1. Methods on change-point analysis
 
-Change-point를 탐지하는 방법은 크게 모수적 방법과 비모수적 방법으로 나눌 수 있습니다. 모수적 방법 중 연구가 가장 많이된 분야는 정규분포에서 평균의 변화에 대한 탐지이며 또한 분산의 변화에 대해서도 연구가 되고 있습니다. 그러나 모수적 방법에는 (1) 모수적 가정은 때때로 현실에서 만족되지 않으며 (2) 아웃라이어에 민감하고, (3) 극단에 위치한 값은 분포에 따라 크게 다르다는 한계점이 존재합니다.
+위에서 설명한 Model에서 change-point를 탐지하는 방법은 크게 모수적 방법과 비모수적 방법으로 나눌 수 있습니다. 모수적 방법 중 연구가 가장 많이된 분야는 정규분포에서 평균의 변화에 대한 탐지이며 또한 분산의 변화에 대해서도 연구가 되고 있습니다. 그러나 모수적 방법에는 (1) 모수적 가정은 때때로 현실에서 만족되지 않으며 (2) 아웃라이어에 민감하고, (3) 극단에 위치한 값은 분포에 따라 크게 다르다는 한계점이 존재합니다.
 
 비모수적 방법은 가정이 훨씬 적으며 다양한 상황에 더 적절하게 사용할 수 있습니다. 전통적인 비모수적 방법 외에도 많은 연구가 되었으며, 2007년의 Empirical likelihood ratio를 이용한 change-point문제에 대한 논문<sup>[1](#footnote_1)</sup>과 2017년에 제안된 Quantile empirical likelihood을 방법<sup>[2](#footnote_2)</sup>을 발전시켜, 이번 논문은 양 방향으로의 double quantile empirical likelihood를 제안합니다.
 
