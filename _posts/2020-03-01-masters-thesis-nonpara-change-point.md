@@ -12,7 +12,7 @@ categories: Statistics
 </script>
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script> -->
 
-## 0. Intro
+
 
 졸업 논문이 본심을 통과하면서 2년의 석사 과정을 마치게 되었습니다. 제가 연구한 주제는 'Change-point detection using Nonparametric methods'으로 교수님의 지도 하에 쓴 졸업 논문에 대해 적어보려 합니다.
 
@@ -238,7 +238,7 @@ $$
 
 ### 3.2. Simulation
 
-다음은 시뮬레이션입니다. Single change-point에 대해 시뮬레이션 수행하였습니다. 평균의 차이를 델타로 고정시키고 두 분포에서 observation값을 추출합니다. 그리고 change-point의 위치는 25%, 50%, 75%, 95%로 4개의 자리에 위치시켰습니다. 컴퓨팅을 고려하여 사이 $p$와 사이 $1-q$의 rank는 전체 샘플사이즈의 절반이상의 차이가 나도록 설정하였습니다. $D_{n}^{\*}$를 가장 크게 하는 $\tau$를 change-point로 택하는 시뮬레이션을 100번 수행하셨습니다.
+다음은 시뮬레이션입니다. Single change-point에 대해 시뮬레이션 수행하였습니다. 평균의 차이를 델타로 고정시키고 두 분포에서 observation값을 추출합니다. 그리고 change-point의 위치는 25%, 50%, 75%, 95%로 4개의 자리에 위치시켰습니다. 컴퓨팅을 고려하여 사이 $p$와 사이 $1-q$의 rank는 전체 샘플사이즈의 절반이상의 차이가 나도록 설정하였습니다. $D_{n}^{\*}$를 가장 크게 하는 $\tau$를 change-point로 택하는 시뮬레이션을 100번 수행하였습니다.
 
 1. Assume that $X_{1}, ... ,X_{n}$ from $F_{1}$, and $Y_{1}, ... ,Y_{m}$ from $F_{2}$ with different distributions by setting $\delta$ satisfying $\delta=E_{F_{1}}(X)-E_{F_{2}}(X)$
 1. Change location $m$ takes 25%, 50%, 75%, and 95% quantiles of the number of samples.
@@ -269,13 +269,10 @@ Change-point 분석에 널리 연구된 Nile데이터에 실제 적용한 결과
 * Zhou, Y., Fu, L., and Zhang, B. (2017). Two non parametric methods for change-point detection in distribution.Communications in Statistics-Theory and Methods, 46(6):2801-2815.
 * Zou, C., Liu, Y., Qin, P., and Wang, Z. (2007). Empirical likelihood ratio test for the change-point problem.Statistics probability letters, 77(4):374-382.
 
-DLR 유도식과 Data application한 DLR와 QLR의 결과가 Appendix에 참고되어 있습니다. 감사합니다.
-
+----------------
 2019년 10월 22일 연세대학교 대우관 본관에서 그동안 연구한 논문으로 졸업을 위한 논문의 예비심사가 이루어졌습니다. 당시 발표했던 자료를 첨부합니다.
 
 <embed src="/assets/images/NP_cpt_Preliminary_Evaluation.pdf" type="application/pdf" width="600px" height="450px" />
-
-
 
 ----------------
 #### footnote
@@ -286,8 +283,3 @@ likelihood ratio test for the change-point problem.
 <a name="footnote_2">2</a>: Zhou, Y., Fu, L., and Zhang, B. (2017): Based on two sample quantile empirical likelihood.
 
 ----------------
-
-
-
-## 9. Outro
-선배들 졸업하실 때 본인의 졸업논문 앞 페이지에 편지를 적어서 주시곤 했습니다. 그동안 많은 졸업 논문을 받았었지만 한 권의 졸업 논문이 탄생하기 까지 얼마나 많은 노고가 있는지 절감했습니다. 생각한 대로 결과가 나오지 않을 때도 있고, 대개는 이미 현존하는 아이디어 일 때가 많았습니다.
