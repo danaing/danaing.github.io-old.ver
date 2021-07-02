@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Empirical Likelihood for Change-point Detection using Double Quantile | 졸업연구논문"
+title:  "Empirical Likelihood for Change-point Detection using Double Quantile (졸업연구논문)"
 date:   2020-02-16
 author: danahkim
 tags: Nonparametric Change-point
