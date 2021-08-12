@@ -34,16 +34,11 @@ categories: ETC
 
 * 문제 구성
   * Category 1: Basic / Simple model
-
   * Category 2: Model from learning datset
-
   * Category 3: Convolutional Neural Network with real-world image dataset
-
   * Category 4: NLP Text Classification with real-world text dataset
-
-  * Category 5: Sequence Model with real-world numeric dataset
-
-    ※ 각 카테고리당 90점 이상 합격
+  * Category 5: Sequence Model with real-world numeric dataset   
+  ※ 각 카테고리당 90점 이상 합격
 
 * 시험 환경: PyCharm IDE
 * 시간: 최대 5시간
@@ -65,25 +60,16 @@ categories: ETC
 
 ## 마치며
 
-이번 자격증 취득을 통해서 TensorFlow 2.x에 대한 이해도를 높일 수 있었습니다. 사실 그보다 무언가 해냈다는 **자신감**과 자격증이 주는 **성취감**이 꾸준히 공부를 하는 긍정적 영향으로 동기부여가 되지 않을까 싶네요. 온라인 자격증 취득이 처음이다 보니 환경세팅에 애즐거운 경험이었습니다.
+이번 자격증 취득을 통해서 TensorFlow 2.x에 대한 이해도를 높일 수 있었습니다. 사실 그보다 무언가 해냈다는 **자신감**과 자격증이 주는 **성취감**이 꾸준히 공부를 하는 긍정적 영향으로 동기부여가 되지 않을까 싶네요. 온라인 자격증 취득이 처음이다 보니 환경 세팅도 직접 해보고 이거저거 시행착오를 겪었지만 새롭고 즐거운 경험이었습니다.
 
-소박하지만 이번 자격증 준비를 통해 느낀 점 입니다.
+소박하지만 이번 자격증 준비를 통해 느낀 점 입니다!
 
-- Colab Pro에 무한한 감사를... 
+* Colab Pro에 무한한 감사를...  GPU가 없다면 ~~정신건강을 위해~~ Colab Pro사용은 선택이 아닌 필수입니다.
+* Callback 도 필수!
+* Dense 뿐만 아니라 Augmentation 각각의 parameter가 성능에 더 예민하다. 어떤 데이터로 train하느냐가 역시 더 중요한 것 같습니다.
+* 역시 Pretrained 모델이 성능이 막강하다는 것을 다시금 느꼈습니다. 제 경우에는 Google에서 만든 VGG Net을 사용하였고, 기존 CNN 모델에 비해 넘사 성능 개선을 하여 문제를 통과하였습니다.
 
-  GPU가 없다면 ~~정신건강을 위해~~ Colab Pro사용은 선택이 아닌 필수입니다
-
-- Callback 도 필수!
-
-- Dense 뿐만 아니라 Augmentation 각각의 parameter가 성능에 더 예민하다.
-
-  어떤 데이터로 train하느냐가 역시 더 중요한 것 같습니다.
-
-- 역시 Pretrained 모델이 성능이 막강하다는 것을 다시금 느꼈습니다.
-
-  제 경우에는 Google에서 만든 VGG Net을 사용하였고, 기존 CNN 모델에 비해 넘사 성능 개선을 하여 문제를 통과하였습니다.
-
-
+시험이 끝나고 바로 합격 통지를 받았고, 당일 자격증을 발급 받았습니다. 이제 링크드인에 구글 텐서플로우 뱃지를 달 수 있겠네요!😆 자격증 취득만을 목적을 두지 않고 이미지, 자연어, 시계열 등의 다양한 분야와 모델을 익히는 것에 의의을 두고 단기 목표로 공부해보시면 좋을 것 같습니다.
 
 ![image](https://user-images.githubusercontent.com/62828866/129131796-8540df67-2f7d-4701-9710-94a911bc5bc6.png)
 
