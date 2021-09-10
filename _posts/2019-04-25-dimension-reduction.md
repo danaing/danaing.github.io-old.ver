@@ -122,7 +122,7 @@ $$
 
 그러면 선형 조합의 계수 벡터인 $a_{i}$가 $\mathbf{X}$의 고유벡터(eigen vector)일 때 $Y_{i}$의 **분산이 최대**가 됩니다!(또한 residual이 최소가 됩니다. 관련 증명은 생략하겠습니다.) 그 최대 분산은 그에 대응한 고유값(eigen value)가 됩니다.
 
-<img src="\assets\images\dimension-reduction\pca4.png" alt="PCA3" style="zoom:20%;" />
+<img src="\assets\images\dimension-reduction\pca4.PNG" alt="PCA3" style="zoom:20%;" />
 
 $$
 max \big( var(Y_{i}) \big) = \lambda_{i} \textrm{ : eigen value} \\ 
@@ -178,5 +178,4 @@ $$
 min_{U, V}||X-UV||^{2}_2 + \alpha ||V||_{1} \\
 \text{subject to } ||U_{k}||_{2} = 1 \text{ for all } 0 \le k < n
 $$
-
 
