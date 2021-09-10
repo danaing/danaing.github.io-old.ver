@@ -58,12 +58,17 @@ disqus_shortname: danaing-github-io
 
 # Category descriptions (for archive pages)
 descriptions:
-  # - cat: Algorithm
-  #   desc: "Posts about algorithm and data structure."
-  #
-  # - cat: dummy
-  #   desc: "Just some placeholder posts, lorem ipsum and the rest."
-
+   # - cat: Statistics
+   #   desc: "Posts about statistics."
+   #
+   # - cat: Programming
+   #   desc: "Just some placeholder posts, lorem ipsum and the rest."
+   #
+   # - cat: Etc
+   #   desc: "Posts about algorithm and data structure."
+   #
+   # - cat: Computer-vision
+   #   desc: "Posts about algorithm and data structure."
 # Social icons and sharing options
 #
 # Social settings are used in two places:
@@ -98,7 +103,7 @@ social:
     icon: github
     username: danaing
     url: https://github.com/danaing
-    desc: Fork me on GitHub
+    desc: Go to GitHub
     share: false
 
   - name: LinkedIn
