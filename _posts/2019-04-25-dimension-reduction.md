@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "차원축소 (Dimension Reduction)"
+title:  "차원축소와 PCA"
 date:   2019-04-25
 author: danahkim
 tags: 
@@ -8,7 +8,9 @@ categories: Statistics
 typora-root-url: ..\assets\images\dimension-reduction
 ---
 
-이번 글은 **차원 축소**에 대해 교내 학회에서 강의했던 내용을 바탕으로 올립니다. 이 글의 수식은 연세대학교 응용통계학과 전용호 교수님의 '회귀분석' 강의안의 수식을 참고하여 제 식으로 설명하기 쉽게 정리했음을 먼저 밝힙니다. 강의한 내용은 <a href="/assets/images/2019-dimension-reduction/Dimension-Reduction.pdf" target="_blank">PDF</a>를 참고하시면 될 것 같습니다.
+이번 글은 **차원 축소**에 대해 교내 학회에서 강의했던 내용을 바탕으로 올립니다. 이 글의 수식은 연세대학교 응용통계학과 전용호 교수님의 '회귀분석' 강의안의 수식을 참고하여 제 식으로 설명하기 쉽게 정리했음을 먼저 밝힙니다. 강의한 내용은 <a href="/assets/images/2019-dimension-reduction/Dimension-Reduction.pdf" target="_blank">PDF</a>를 참고하시면 될 것 같습니다. 오늘은 차원 축소의 대표적인 통계 기법인 PCA에 대해 알아보겠습니다.
+
+## 
 
 
 
@@ -25,19 +27,17 @@ typora-root-url: ..\assets\images\dimension-reduction
 
 <img src="\assets\images\dimension-reduction\dimension-reduction-02.png" alt="" style="zoom:40%;" />
 
-Machine Learning에서 feature가 하나 늘어나면 차원이 하나 증가합니다. 특히 Machine Learning에서 **차원의 저주**는 차원이 커질수록 역설적으로 성능 저하를 가져오는 것을 의미합니다. 표본인 학습 데이터는 제한적임에 비해 차원이 계속 늘어난다면 어떻게 될까요? 왼쪽 그림을 보면 축의 0.5 거리에서 1차원에서는 데이터가 모여있지만 차원이 늘어날수록 점점 퍼지게 됩니다. 이렇듯 **고차원일수록 학습 데이터가 그 공간을 충분히 설명하기 어렵습니다.**
+Machine Learning에서 feature가 하나 늘어나면 차원이 하나 증가합니다. 특히 Machine Learning에서 **차원의 저주**는 차원이 커질수록 역설적으로 성능 저하를 가져오는 것을 의미합니다. 왼쪽 그림을 보면 축의 0.5 거리에서 1차원에서는 데이터가 모여있지만 차원이 늘어날수록 점점 퍼지게 됩니다. 이렇듯 표본인 학습 데이터는 제한적임에 비해 **차원이 계속 늘어난다면 학습 데이터가 그 공간을 충분히 설명하기 어렵습니다.**
 
-오른쪽 그림을 보면, 같은 공간(x축)을 설명하기 위해 필요한 차원의 수와 거리가 나타나있는데요, 1차원에서 10%의 공간을 채우기 위해서는 10%의 데이터가 필요합니다($0.1=0.1$). 그러나 10차원에서 10%의 공간을 설명하기 위해서는 각각의 축에 대해 80%의 데이터가 필요합니다($(0.8)^{10} = 0.1$). **즉, 공간은 기하급수적으로 증가하는 것에 비해 한정된 학습 데이터로 공간을 설명하기 때문에 과적합(overfitting)이 일어나고, 모델의 성능이 저하되는 것입니다.** 이 뿐만 아니라 학습 속도도 상당히 느려집니다.
+오른쪽 그림을 보면, 같은 공간을 설명하기 위해 필요한 차원의 수와 거리가 나타나있습니다. 1차원에서 10%의 공간을 채우기 위해서는 10%의 데이터가 필요합니다($0.1=0.1$). 그러나 10차원에서 10%의 공간을 설명하기 위해서는 각각의 축에 대해 80%의 데이터가 필요합니다($(0.8)^{10} = 0.1$). **즉, 공간은 기하급수적으로 증가하는 것에 비해 한정된 학습 데이터로 공간을 설명하기 때문에 과적합(overfitting)이 일어나고, 모델의 성능이 저하되는 것입니다.** 이 뿐만 아니라 학습 속도도 상당히 느려집니다.
 
 ### Dimension Reduction
 
-따라서 차원의 저주 문제를 해결하기 위해 **차원 축소**가 필요합니다. 예를들어 MNIST 데이터셋이 있다고 할 때 이미지 한 장은 28*28=784차원의 데이터입니다. 이 데이터를 그대로 사용한다면 784차원을 모두 학습해야겠지만, 그렇다면 위에서 말한 문제가 발생할 것입니다.
+따라서 차원의 저주 문제를 해결하기 위해 **차원 축소**가 필요합니다. 예를들어 MNIST 데이터셋이 있다고 할 때 이미지 한 장은 28*28=784차원의 데이터입니다. 이 데이터를 그대로 사용한다면 784차원을 모두 학습해야겠지만, 그렇다면 위에서 말한 문제가 발생할 수 있습니다.
 
 <img src="\assets\images\dimension-reduction\MnistExamples.png" alt="img" style="zoom:50%;" />
 
 따라서 모든 feature를 사용하는 것이 아니라 비슷한 픽셀 덩어리를 하나로 묶어서 보거나, 중요한 픽셀만 뽑을 수 있도록 하는 것이 차원 축소입니다. 즉, 고차원 데이터를 통째로 다 쓰는 것이 아니라 **데이터를 압축하고 요약하여 큰 특징들만 사용하는 것입니다.** 예를들어 획이 길쭉하거나, 획이 동그랗다는 2개의 큰 특징을 뽑을 수도 있습니다. 이는 Convolution layer를 사용하여 저차원의 feature map으로 주요 특징을 추출하는 것 또한 이미지의 차원 축소의 예라고 할 수 있습니다.
-
-오늘은 차원 축소의 대표적인 통계 기법인 PCA에 대해 알아보겠습니다.
 
 ## 2. Principal Component Analysis(PCA)
 
@@ -53,9 +53,9 @@ Machine Learning에서 feature가 하나 늘어나면 차원이 하나 증가합
 
 ### What is PCA?
 
-<img src="\assets\images\dimension-reduction\pca3.png" alt="img" style="zoom:80%;" />
+<img src="\assets\images\dimension-reduction\pca3.png" alt="img" style="zoom:90%;" />
 
-PCA는 **최대 분산을 가지도록 원래 변수의 선형 조합을 찾습니다.** 위처럼 Feature1과 Feature2를 조합하여 새로운 하늘색 축인 주성분(ex. PC = 0.5\*Feature1 + 0.5\*Feature2)으로 표현하는 것이죠.
+PCA는 **최대 분산을 가지도록 기존 변수의 선형 결합을 찾습니다.** 위처럼 Feature1과 Feature2를 조합하여 새로운 하늘색 축인 주성분(ex. PC = 0.5\*Feature1 + 0.5\*Feature2)으로 표현하는 것이죠.
 
 **아이디어**
 
@@ -70,7 +70,7 @@ PCA는 **최대 분산을 가지도록 원래 변수의 선형 조합을 찾습�
 
 ### Linear Combination
 
-위에서 말한 **선형 조합**에 대해서 잠깐 더 살펴보겠습니다. 먼저 p개의 변수가 있는 원 데이터 $\mathbf{X}$ 행렬이 평균을 중심(centered data)으로 되어있다고 가정합니다.
+위에서 말한 **선형 결합**에 대해서 잠깐 더 살펴보겠습니다. 변수가 $p$개, 관측치가 $n$개 의 변수가 있는 원 데이터 $\mathbf{X}$(p x n) 행렬이 평균을 중심(centered data)으로 되어있다고 가정합니다. 여기서 $x_{i}$는 데이터 행렬 $\mathbf{X}$의  행벡터(1 x n)입니다.
 
 
 $$
@@ -80,38 +80,87 @@ x_{11} & x_{12} & \ldots \\
 x_{21} & x_{22} & \ldots \\
 \vdots & \vdots & \ddots
 \end{array} \right)
-= \left( x_{1} \, x_{2} \, \ldots \, x_{p} \right)
+= \left( \begin{array}{ccc}
+x_{1} \\
+x_{2} \\
+\vdots \\
+\end{array} \right)
 $$
 
 
-우선 이 $\mathbf{X}$ 가 아니라, $X_{i}$를 선형 조합한 $\mathbf{Y}$ 행렬로 표현하겠습니다.
+우선 이 $\mathbf{X}$ 가 아니라, $X_{i}$를 선형 조합한 새로운 $y__{i}$(1 x n)으로 표현하겠습니다.
 
 
 $$
 \left\{ \begin{array}{ll}
-Y_{1} = Xa_{1} = a_{11}x_{1} + a_{12}x_{2} + \ldots + a_{1p}x_{p} \\
+y_{1} = a_{11}x_{1} + a_{12}x_{2} + \ldots + a_{1p}x_{p} = a_{1}^{T}\mathbf{X} \\
 \vdots  \\
-Y_{p} = Xa_{p} = a_{p1}x_{1} + a_{p2}x_{2} + \ldots + a_{pp}x_{p} \\
+y_{p} = a_{p1}x_{1} + a_{p2}x_{2} + \ldots + a_{pp}x_{p} = a_{p}^{T}\mathbf{X} \\
 \end{array} \right.
 $$
 
-그리고 이제 이 $\mathbf{Y}$를 새로운 축으로 생각합니다.
+이러한 선형 결합은 $y_{i}$는 $\mathbf{X}$를 새로운 $a_{i}$(p x 1)의 축으로 사영(projection)한 것입니다. 만들어진 $y_{i}$로 구성된 행렬 $\mathbf{Y}$ (p x n)은 아래처럼 나타낼 수 있습니다.
+
+
+$$
+\mathbf{Y} =\left( \begin{array}{cccc}
+y_{1} \\
+y_{2} \\
+\vdots \\
+y_{p}
+\end{array} \right)
+ =\left( \begin{array}{cccc}
+a_{1}^{T} \mathbf{X} \\
+a_{2}^{T} \mathbf{X} \\
+\vdots \\
+a_{p}^{T} \mathbf{X}
+\end{array} \right)
+= A^{T} \mathbf{X}
+$$
+
 
 
 
 ### PCA on Covariance
 
-우리는 새로운 축인 $Y_{i}$의 분산을 최대화하고 싶습니다. 여기서 $Y_{i}$의 분산은 결국 $X_{i}$의 분산을 최대화하는 것과 같습니다.
+위에서 보았든 우리는 새로운 축으로 선형 결합된 $\mathbf{Y}$의 분산을 최대화하고 싶습니다.
 $$
-var(Y_{i})=var(Xa_{i})=a_{i}^{T}var(X)a_{i}
+Var(\mathbf{Y})=Var(A^{T}\mathbf{X})=A^{T}Cov(\mathbf{X})A
+$$
+
+여기서 $a_{i}$의 norm은 1로 제약하고 분산을 가장 크게하는 $a_{i}$를 라그랑지안을 사용하여 구합니다. 
+$$
+max_{a_{i}}\{Var (\mathbf{Y})\}
+= max_{a_{i}}\{ Var (a_{i} \mathbf{X}) \} 
+= max_{a_{i}} \{  a_{i}^{T} Cov (\mathbf{X}) a_{i} \}
 $$
 
 
-$var(X)$로 표현된 공분산은 Spectral Decomposition에 의해 아래처럼 분해됩니다.
+제약식을 $\lambda$ 안에 적어줍니다.
+$$
+L = a_{i}^{T}Cov(\mathbf{X})a_{i} - \lambda (a_{i}^{T}a_{i}-1)
+$$
+$a_{i}$로 미분한 식을 0으로 두고 최대값을 찾으면 아래와 같습니다.
+
 
 $$
-\mathbf{X^{T}X} = \Sigma : \text{Covariance matrix} \\
-\text{By Spectral Decomposition, } \mathbf{X^{T}X} = \mathbf{VDV^{T}} \\
+\begin{align*}
+\frac{\partial L}{\partial a_{i}} = Cov(\mathbf{X})a_{i} - \lambda a_{i} &= 0\\
+(Cov(\mathbf{X})-\lambda) a_{i} & = 0
+\end{align*}
+$$
+
+
+
+
+_이 정의는 고유 값과 고유 벡터의 정의와 같습니다! 선형 조합의 계수 벡터인 $a_{i}$가 $\mathbf{X}$의 고유벡터(eigen vector)일 때 $Y_{i}$의 **분산이 최대**가 됩니다! 그 최대 분산은 그에 대응한 고유값(eigen value)가 됩니다.
+
+
+
+$Cov(\mathbf{X})$는 $XX^{T}$에 비례하며 이렇게 표현된 공분산은 Spectral Decomposition에 의해 아래처럼 분해됩니다.
+$$
+\mathbf{XX^{T}} = \Sigma : \text{Covariance matrix (p x p)} \\
+\text{By Spectral Decomposition, } \mathbf{XX^{T}} = \mathbf{VDV^{T}} \\
 \text{where } \mathbf{V^{T}V}=\mathbf{VV^{T}}= \mathbf{I} \\
 \text{with } \mathbf{V} \{ v_{1}, v_{2}, ..., v_{p} \} \text{ (eigenvectors)} \\
 \text{ and }\mathbf{D}=diag \{\lambda_{1}, \lambda_{2}, \ldots \lambda_{p} \} \\
@@ -120,13 +169,16 @@ $$
 
 
 
-그러면 선형 조합의 계수 벡터인 $a_{i}$가 $\mathbf{X}$의 고유벡터(eigen vector)일 때 $Y_{i}$의 **분산이 최대**가 됩니다!(또한 residual이 최소가 됩니다. 관련 증명은 생략하겠습니다.) 그 최대 분산은 그에 대응한 고유값(eigen value)가 됩니다.
+
 
 <img src="\assets\images\dimension-reduction\pca4.PNG" alt="PCA3" style="zoom:20%;" />
 
+
 $$
-max \big( var(Y_{i}) \big) = \lambda_{i} \textrm{ : eigen value} \\ 
- \textrm{when } a_{i} = v_{i} \textrm{ : eigen vector}
+\begin{align*}
+max \big( var(Y_{i}) \big) &= \lambda_{i} \textrm{ : eigen value} \\ 
+ \textrm{when } a_{i} &= v_{i} \textrm{ : eigen vector}
+\end{align*}
 $$
 
 
