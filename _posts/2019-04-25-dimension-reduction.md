@@ -88,7 +88,7 @@ x_{2} \\
 $$
 
 
-우선 이 $\mathbf{X}$ 가 아니라, $X_{i}$를 선형 조합한 새로운 $y__{i}$(1 x n)으로 표현하겠습니다.
+우선 이 $\mathbf{X}$ 가 아니라, $X_{i}$를 선형 조합한 새로운 $y_{i}$(1 x n)으로 표현하겠습니다.
 
 
 $$
@@ -124,15 +124,20 @@ $$
 ### PCA on Covariance
 
 위에서 보았든 우리는 새로운 축으로 선형 결합된 $\mathbf{Y}$의 분산을 최대화하고 싶습니다.
+
+
 $$
 Var(\mathbf{Y})=Var(A^{T}\mathbf{X})=A^{T}Cov(\mathbf{X})A
 $$
 
 여기서 $a_{i}$의 norm은 1로 제약하고 분산을 가장 크게하는 $a_{i}$를 라그랑지안을 사용하여 구합니다. 
+
+
 $$
-max_{a_{i}}\{Var (\mathbf{Y})\}
-= max_{a_{i}}\{ Var (a_{i} \mathbf{X}) \} 
-= max_{a_{i}} \{  a_{i}^{T} Cov (\mathbf{X}) a_{i} \}
+\begin{align*}
+\underset{a_{i}}{max}\{Var (\mathbf{Y})\} &= \underset{a_{i}}{max}\{ Var (a_{i} \mathbf{X}) \} \\
+&= \underset{a_{i}}{max} \{  a_{i}^{T} Cov (\mathbf{X}) a_{i} \}
+\end{align*}
 $$
 
 
@@ -151,13 +156,13 @@ $$
 $$
 
 
-
-
-_이 정의는 고유 값과 고유 벡터의 정의와 같습니다! 선형 조합의 계수 벡터인 $a_{i}$가 $\mathbf{X}$의 고유벡터(eigen vector)일 때 $Y_{i}$의 **분산이 최대**가 됩니다! 그 최대 분산은 그에 대응한 고유값(eigen value)가 됩니다.
+**고유벡터(eigenvector)**의 정의에 의해 $a$는 $Cov(\mathbf{X})$의 고유벡터, **고유값(eigenvalue)**의 정의에 의해 $\lambda$는 $Cov(\mathbf{X})$의 고유값이 됩니다. 즉 선형 조합의 계수 벡터인 $a_{i}$가 $\mathbf{X}$의 고유벡터(eigen vector)일 때 $Y_{i}$의 **분산이 최대**가 됩니다.
 
 
 
 $Cov(\mathbf{X})$는 $XX^{T}$에 비례하며 이렇게 표현된 공분산은 Spectral Decomposition에 의해 아래처럼 분해됩니다.
+
+
 $$
 \mathbf{XX^{T}} = \Sigma : \text{Covariance matrix (p x p)} \\
 \text{By Spectral Decomposition, } \mathbf{XX^{T}} = \mathbf{VDV^{T}} \\
@@ -169,9 +174,23 @@ $$
 
 
 
+따라서 $y_{i}$의 분산은 아래와 같이 쓸 수 있습니다. 
 
 
-<img src="\assets\images\dimension-reduction\pca4.PNG" alt="PCA3" style="zoom:20%;" />
+$$
+\begin{align*}
+Var(y_{i}) &= v_{i}^{T}Cov(\mathbf{X})v_{i} \\
+&= v_{i}^{T}\mathbf{VDV^{T}}v_{i} \\
+&=\lambda_{i}
+\end{align*}
+$$
+
+
+분산은 그에 대응한 고유값(eigen value)가 됩니다.
+
+
+
+<img src="\assets\images\dimension-reduction\pca4.PNG" alt="PCA3" style="zoom:80%;" />
 
 
 $$
@@ -185,7 +204,7 @@ $$
 
 따라서 새로 만들어진 X의 선형 조합 $XV$는 주성분 축이 되며, 아래처럼 나타낼 수 있습니다. **가장 큰 고유값 순으로 그에 대응하는 고유벡터에 mapping한 데이터들이 가장 큰 정보를 가지고 있습니다!** 따라서PC1, PC2, ... 순으로 그 축이 데이터를 가장 많이 설명합니다.
 
-그리고 이 주성분 축은 고유벡터에 mapping하기 때문에 모두 선형 독립입니다. 즉 PCA는 **다중공선성(multicollinearity)을 해결**합니다.
+주성분 축은 **선형 독립(orthogonal)**한 고유벡터에 mapping하기 때문에 **다중공선성(multicollinearity)을 해결**합니다.
 
 
 
@@ -195,8 +214,8 @@ $$
 
 
 $$
-PC1 = Xv_{1} \\
-PC2 = Xv_{2}
+PC1 = v_{1}^{T}X \\
+PC2 = v_{2}^{T}X
 $$
 
 ### Result of PCA
