@@ -21,6 +21,8 @@ Mingxing Tan, Quoc V. Le
 
 오늘 살펴볼 논문은 EfficientNetV2입니다. Google Brain에서 2년 전 공개한 EfficientNet은 다른 모델에 비해 **빠른 학습 속도와 높은 성능**으로 주목을 받아 현재까지 최고의 성능으로 널리 사용되었습니다. EfficientNet 관련 리뷰는 제가 작성한 이곳을 참고하시면 좋을 것 같습니다. 그리고 최근 Google Brain에서 학습 속도와 정확도를 더욱 개선한 **EfficientNetV2(2021)**를 발표했습니다. 본 논문을 전체적인 흐름에 따라 리뷰해보겠습니다.
 
+<img src="\assets\images\EfficientNetV2\0.png" />
+
 
 
 ## Introduction
