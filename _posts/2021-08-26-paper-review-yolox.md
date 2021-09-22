@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[Paper review] YOLOX: Exceeding YOLO Series in 2021"
+title:  "[Object Detection] YOLOX: Exceeding YOLO Series in 2021 (CVPR 2021)"
 date:   2021-08-26
 author: danahkim
 tags: Object-Detection
