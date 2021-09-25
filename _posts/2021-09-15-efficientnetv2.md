@@ -19,7 +19,7 @@ Mingxing Tan, Quoc V. Le
 
 
 
-오늘 살펴볼 논문은 EfficientNetV2입니다. Google Brain에서 2년 전 공개한 EfficientNet은 다른 모델에 비해 **빠른 학습 속도와 높은 성능**으로 주목을 받아 현재까지 최고의 성능으로 널리 사용되었습니다. EfficientNet 관련 리뷰는 제가 작성한 이곳을 참고하시면 좋을 것 같습니다. 그리고 최근 Google Brain에서 학습 속도와 정확도를 더욱 개선한 **EfficientNetV2(2021)**를 발표했습니다. 본 논문을 전체적인 흐름에 따라 리뷰해보겠습니다.
+오늘 살펴볼 논문은 EfficientNetV2입니다. Google Brain에서 2년 전 공개한 EfficientNet은 다른 모델에 비해 **빠른 학습 속도와 높은 성능**으로 주목을 받아 현재까지 최고의 성능으로 널리 사용되었습니다. EfficientNet 관련 리뷰는 제가 작성한 이곳을 참고하시면 좋을 것 같습니다. 그리고 최근 Google Brain에서 학습 속도와 정확도를 개선하여 기존 모델의 성능을 크게 상회하는 **EfficientNetV2(2021)**를 발표했습니다. 본 논문을 전체적인 흐름에 따라 리뷰해보겠습니다.
 
 <img src="\assets\images\EfficientNetV2\0.png" />
 
@@ -41,7 +41,7 @@ Mingxing Tan, Quoc V. Le
 
 
 
-그럼 어떻게 학습 속도와 정확도, 그리고 파라메터 효율성을 개선하였는지 살펴보겠습니다.
+그럼 어떻게 학습 속도와 정확도, 그리고 파라미터 효율성을 개선하였는지 중점적으로 살펴보겠습니다.
 
 
 
@@ -55,17 +55,17 @@ Mingxing Tan, Quoc V. Le
 
 **- 큰 이미지로 학습을 하면 학습 속도가 느립니다.**
 
-EfficientNetV1(2019)의 큰 이미지 크기는 상당한 메모리 사용량을 가져옵니다. GPU/TPU의 메모리 총량은 고정되어 있기 때문에 더 작은 배치 크기로 학습하여야 하므로 훈련 속도가 크게 느려집니다. Table 2를 보면 더 작은 이미지 크기는 적은 연산량을 가져오고 더 큰 배치 크기를 가능하게 하기 때문에 학습 속도를 2.2배까지 향상시킵니다. 특히, 학습에 더 작은 이미지 크기의 사용은 더 좋은 정확도를  가져옵니다.
+EfficientNetV1(2019)의 큰 이미지 크기는 상당한 메모리 사용량을 가져옵니다. GPU/TPU의 메모리 총량은 고정되어 있기 때문에 더 작은 배치 크기로 학습하여야 하므로 훈련 속도가 크게 느려집니다. Table 2를 보면 더 작은 이미지 크기는 적은 연산량을 가져오고 더 큰 배치 크기를 가능하게 하기 때문에 학습 속도를 2.2배까지 향상시킵니다. 특히, 학습에 더 작은 이미지 크기의 사용은 더 좋은 정확도를 가져옵니다.
 
 <img src="\assets\images\EfficientNetV2\1.png" />
 
-따라서 개선된 학습 방식인 학습 중에 **이미지 크기와 정규화를 점진적으로 조정하는 Progressive learning**에 대해 더 알아보겠습니다.
+따라서 개선된 학습 방식인 **이미지 크기와 정규화를 점진적으로 조정하는 Progressive learning**에 대해 더 알아보겠습니다.
 
 
 
 #### Progressive learning
 
-이미지 크기는 모델의 학습 시간에 중요한데, 이미지 크기를 변형시켜 학습하는 다양항 방법들이 있지만 종종 정확도의 저하를 야기하기도 합니다. 저자는 여기서 정확도의 저하가 불균형한 정규화에서 비롯된 것이라 가정합니다. 즉, 다른 이미지 크기를 학습할 때 고정된 정규화를 사용하는 것이 아니라 **이미지 크기에 따라서 정규화의 강도도 조정해야 된다는 것** 입니다.
+이미지 크기는 모델의 학습 시간에 중요한데, 이미지 크기를 변형시켜 학습하는 다양한 방법들이 있지만 종종 정확도의 저하를 야기하기도 합니다. 저자는 여기서 정확도의 저하가 불균형한 정규화에서 비롯된 것이라 가정합니다. 즉, 다른 이미지 크기를 학습할 때 고정된 정규화를 사용하는 것이 아니라 **이미지 크기에 따라서 정규화의 강도도 조정해야 된다는 것** 입니다.
 
 <img src="\assets\images\EfficientNetV2\2.png" />
 
@@ -89,7 +89,7 @@ EfficientNetV1(2019)의 큰 이미지 크기는 상당한 메모리 사용량을
 
 **- Depthwise convolution은 초기 레이어에서 학습 속도가 느립니다.**
 
-EfficientNetV1(2019)의 또 다른 병목은 광범위한 depthwise convolution에서 발생합니다. Depthwise convolutions은 MobileNetV1과 Xception에서 제안된 방법입니다. 효과가 입증되어 최신 모델에 이용하고 있습니다. Depthwise convolution은 Conv 연산량을 줄여 제한된 연산량 아래에서 더 많은 filter를 사용할 수 있는 이점이 있습니다. 하지만 Depthwise convolution은 modern accelerator를 사용하지 못하기 때문에 학습 속도가 느립니다. 따라서 **Stage1-3에서는 MBConv 대신에 Fused-MBConv를 사용**합니다. Fused-MBConv는 MBConv의 1x1 conv + 3x3 depthwise conv 대신에 하나의 3x3 conv를 사용하는 것입니다. 모든 stage에 Fused-MBConv를 적용하니 오히려 학습 속도가 느려져 초기의 stage에만 Fused-MBConv를 사용합니다.
+EfficientNetV1(2019)의 또 다른 병목은 광범위한 depthwise convolution에서 발생합니다. Depthwise convolutions은 MobileNetV1과 Xception에서 제안된 방법으로 효과가 입증되어 최신 모델에 이용하고 있습니다. Depthwise convolution은 Conv 연산량을 줄여 제한된 연산량 아래에서 더 많은 filter를 사용할 수 있는 이점이 있지만 modern accelerator를 사용하지 못하기 때문에 학습 속도가 느립니다. 따라서 **Stage1-3에서는 MBConv(Mobile inverted bottleneck convolution) 대신에 Fused-MBConv를 사용**합니다. Fused-MBConv는 MBConv의 1x1 conv + 3x3 depthwise conv 대신에 하나의 3x3 conv를 사용하는 것입니다. 모든 stage에 Fused-MBConv를 적용하니 오히려 학습 속도가 느려져 초기의 stage에만 Fused-MBConv를 사용합니다.
 
 <img src="\assets\images\EfficientNetV2\5.png" />
 
@@ -109,12 +109,12 @@ EfficientNetV1(2019)와 마찬가지로 AutoML 방법인 신경망 아키텍쳐 
 
 <img src="\assets\images\EfficientNetV2\6.png" />
 
-EfficientNetV1(2019)과 차이점은 다음과 같습니다.
+기존 EfficientNetV1(2019)과 주요 차이점은 다음과 같습니다.
 
-1. MBConv와 새로 추가된 fused-MBConv를 구조를 초기 레이어에 사용합니다.
-2. MBConv에 대해서 작은 Expansion ratio를 사용합니다. (메모리 엑세스 오버헤드를 줄이기 위해)
+1. MBConv와 새로 추가된 fused-MBConv를 초기 레이어에 사용합니다.
+2. 메모리 접근 비용을 줄이기 위해 MBConv에 대해서 작은 expansion ratio를 사용합니다.
 3. 3x3의 작은 커널 사이즈를 사용하고 그에 따른 receptive field 감소를 보완하기 위해서 더 많은 레이어를 사용합니다.
-4. 파라미터와 메모리 엑세스 오버헤드를 줄이기 위해서 기존의 EfficientNet에서의 마지막 stride-1 단계를 완전히 제거했습니다.
+4. 파라미터와 메모리 접근 비용을 줄이기 위해 기존의 EfficientNetV1에서의 마지막 stride-1 단계를 완전히 제거합니다.
 
 
 
@@ -139,15 +139,16 @@ EfficientNetV2-S 모델을 기존의 compound scaling에 몇가지 추가적인 
 
 <img src="\assets\images\EfficientNetV2\9.png" />
 
-기존 ConvNet에 비해 비슷한 정확도를 보이면서 파라미터 수와 FLOPS 수를 많이 절약할 수 있는 것을 알 수 있습니다. Figure 5를 보면 동일 파라미터 수와 FLOPS수에서 최고 정확도를 보이고 있습니다. 이 외에도 다양한 실험 결과들은 논문에서 추가로 확인하실 수 있습니다.
+Figure 5를 보면 동일 파라미터 수와 FLOPS수에서 기존 ConvNet보다 더 높은 성능을 보이고 있습니다. 기존 ConvNet에 비해 비슷한 정확도를 보이면서 파라미터 수와 FLOPS 수를 훨씬 절약한 것을 알 수 있습니다. 이 외에도 다양한 실험 결과들은 논문에서 추가로 확인하실 수 있습니다.
 
 <img src="\assets\images\EfficientNetV2\10.png" />
 
+기존 EfficientNetV1의 문제점을 개선하면서 더 월등한 성능과 동시에 학습 속도와 파라미터 수를 동시에 절약한 점이 인상깊습니다.
 
 
-## 결론
 
-- 저자가 제안한 EfficientNetV2는 이미지 인식을 위한 더 작고 더 빠른 새로운 모델입니다. 개선된 NAS와 model scaling을 사용하여 기존 모델보다 더 성능을 앞서며 더 빠르고 파라미터를 더 절약하는 모델입니다. 
-- 빠른 학습 속도 위해 제안된 progressive learning로 EfficientNetV2가 ImageNet, CIFAR/Flowers/Cars 에 좋은 성능을 보이고 있음을 보여줍니다.
-- EfficientNetV1과 최근 다른 연구들에 비해 EfficientNetV2는 최대 11배 정도 빠르고 6.8배 정도 작은 모델입니다.
+### References
 
+[1] EfficientNetV2: Smaller Models and Faster Training : https://arxiv.org/abs/2104.00298
+
+[2] EfficientNetV2 Code : https://github.com/google/automl/tree/master/efficientnetv2
