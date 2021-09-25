@@ -149,6 +149,6 @@ Figure 5를 보면 동일 파라미터 수와 FLOPS수에서 기존 ConvNet보�
 
 ### References
 
-[1] EfficientNetV2: Smaller Models and Faster Training : https://arxiv.org/abs/2104.00298
+[1] [EfficientNetV2: Smaller Models and Faster Training](https://arxiv.org/abs/2104.00298)
 
-[2] EfficientNetV2 Code : https://github.com/google/automl/tree/master/efficientnetv2
+[2] [EfficientNetV2 Code](https://github.com/google/automl/tree/master/efficientnetv2)
