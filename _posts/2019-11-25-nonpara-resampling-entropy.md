@@ -3,7 +3,7 @@ layout: post
 title:  "Resampling using Multivariate Entropy in Classification"
 date:   2019-11-25
 author: danahkim
-tags: Nonparametric Entropy Resampling
+tags: Nonparametric Entropy
 categories: Statistics
 ---
 
@@ -50,12 +50,12 @@ $$
 \widehat{ H(X) } = 1.968382
 $$
 
-Entropy를 empirical하게 추정하는 방법으로 Maximum likelihood인 $p_i=1/n$을 사용하여 histogram으로 추정하는 방법이 있다. 즉 각 bin에서 frequency에 따라 entropy가 부여되는 것이다. 따라서 imbalanced dataset의 resampling시에 majority class와 minority class의 entropy를 고려해준다면 두 class의 정보량이 고르게 고려되어 classification의 성능이 개선될 수 있다고 생각하였다.
+Entropy를 empirical하게 추정하는 방법으로 Maximum likelihood인 $p_i=1/n$을 사용하여 histogram으로 추정하는 방법이 있다. 즉 각 bin에서 frequency에 따라 entropy가 부여되는 것이다. imbalanced dataset의 resampling시에 majority class와 minority class의 empirical entropy를 고려해준다면 두 class의 정보량이 고르게 고려되어 classification의 성능이 개선될 수 있다고 생각하였다.
 
 
 ## 2. Limitations of Resampling Methods
 
-기존의 resampling방법 중 SMOTE가 성능이 좋다고 알려져 있다. 그러나 이는 Synthetic data를 생성하므로써 categorical variable이나 범위가 정해진 variable에서 사용하기 어렵다. 예를 들어 성별이 남(0), 여(1)일 때, 0.5로 생성된 Synthetic data는 그 의미를 알기 어렵다. 따라서 categorical variable이 존재하는 data에서 SMOTE를 사용한 oversampling보다 entropy를 고려한 sampling이 효과적일 수 있다. 또한 random sampling과 SMOTE에서 borderline을 고려한 sampling보다 entropy를 활용한 sampling이 더 효과적임을 증명해보고자 한다.
+기존의 resampling방법 중 SMOTE가 성능이 좋다고 알려져 있다. 그러나 이는 Synthetic data를 생성하므로써 categorical variable이나 범위가 정해진 variable에서 사용하기 어렵다. 예를 들어 성별이 남(0), 여(1)일 때, 0.5로 생성된 Synthetic data는 그 의미를 알기 어렵다. 따라서 categorical variable이 존재하는 data에서 SMOTE를 사용한 oversampling보다 entropy를 고려한 sampling이 효과적일 수 있다. 또한 random sampling과 SMOTE에서 borderline을 고려한 sampling보다 entropy를 활용한 sampling이 더 효과적인지 증명해보고자 한다.
 
 
 ## 3. Proposed Resampling Methodology using Entropy
