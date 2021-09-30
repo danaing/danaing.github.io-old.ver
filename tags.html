@@ -1,0 +1,38 @@
+---
+layout: tag
+title: "Tags"
+permalink: /tags/
+main_nav: true
+---
+
+<ul class="tag-cloud">
+    {% for tag in site.tags %}
+        <!-- tag_name 변수 지정: 태그명은 소문자화(slugize) 한다   {%  capture tag_name %}{{tag|first|slugize}}{% endcapture %}-->
+
+        <!-- font_size 변수 지정: 태그숫자/전체태그숫자 * 100 + 50 -->
+        {% capture font_size %}{{tag|last|size| times:100 | divided_by:site.tags.size | plus: 70 }}%{% endcapture %}
+        <!-- tag_size 변수 지정 {% capture tag_size %}{{tag|last|size}}{% endcapture %}-->
+        <span style="font-size:{{font_size}}">
+            <a href="#{{ tag | first | slugize }}">
+                {{ tag | first }}
+            </a> &nbsp;&nbsp;
+        </span>
+    {% endfor %}
+</ul>
+
+{% unless page.cover %} {% include page_divider.html %} {% endunless %}
+
+<div id="archives">
+{% for tag in site.tags %}
+    <div class="archive-group">
+    {% capture tag_name %}{{ tag | first }}{% endcapture %}
+    <h3 id="#{{ tag_name | slugize }}">{{ tag_name }}({{site.tags[tag_name].size}})</h3>
+    <a name="{{ tag_name | slugize }}"></a>
+    {% for post in site.tags[tag_name] %}
+    <article class="archive-item">
+        <h4><a href="{{ root_url }}{{ post.url }}">{{post.title}}</a></h4>
+    </article>
+    {% endfor %}
+    </div>
+{% endfor %}
+</div>
