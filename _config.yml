@@ -29,7 +29,7 @@ logo: "/assets/logo.png"
 markdown: kramdown
 paginate: 5
 paginate_path: "/page:num/"
-inter_post_navigation: false
+inter_post_navigation: true
 highlightjs_theme: "monokai-sublime"
 
 # Pagination Settings
@@ -58,17 +58,20 @@ disqus_shortname: danaing-github-io
 
 # Category descriptions (for archive pages)
 descriptions:
-   # - cat: Statistics
-   #   desc: "Posts about statistics."
-   #
-   # - cat: Programming
-   #   desc: "Just some placeholder posts, lorem ipsum and the rest."
-   #
-   # - cat: Etc
-   #   desc: "Posts about algorithm and data structure."
-   #
-   # - cat: Computer-vision
-   #   desc: "Posts about algorithm and data structure."
+      # - cat: Statistics
+      #   desc: "통계 관련된 포스팅"
+      #
+      # - cat: Programming
+      #   desc: "Python을 이용한 자료구조와 알고리즘 및 프로그래밍"
+      #
+      # - cat: etc
+      #   desc: ""
+      #
+      # - cat: Computer-vision
+      #   desc: "Computer Vision 관련 논문 리뷰 및 코드 구현"
+      #
+      # - cat: Deep-Learning
+      #   desc: "DeepLearning 관련 자료"
 # Social icons and sharing options
 #
 # Social settings are used in two places:
