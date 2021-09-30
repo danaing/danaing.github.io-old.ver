@@ -25,7 +25,7 @@ Convolutional neural networks(CNNs)은 일반적으로 고정된 리소스 비�
 
 <img src="\assets\images\EfficientNet\image1.png" />
 
-네트워크 확장 효과에 대해 이해하기 위해서 모델의 다른 차원의 확장 효과에 대해 연구하였습니다. 채널의 개수를 늘리는 **width scaling**, layer의 개수를 늘리는 **depth scaling**, input image의 해상도를 높이는 **resolution scaling**이 있습니다. ResNet ([He et al, 2016](https://arxiv.org/abs/1512.03385))은 depth를 통해 모델을 확장하는 대표적인 모델이며 MobileNet ([Howard et al., 2017](https://arxiv.org/abs/1704.04861))은 width를 조절하여 모델을 확장하는 대표적인 모델입니다. 각각의 차원을 개별적으로 확장하면 모델의 성능이 향상되지만, 모든 차원의 균형을 맞추어 동시에 확장하는 것이 전반적인 성능을 더 잘 향상시킨다는 것을 논문에서 실험으로 보여줍니다. 즉 모델을 확장하기 위해 3가지 차원을 함께 고려하는 **Compound scaling** 방법을 제안합니다.
+네트워크 확장 효과에 대해 이해하기 위해서 모델의 다른 차원의 확장 효과에 대해 연구하였습니다. 채널의 개수를 늘리는 **width scaling**, layer의 개수를 늘리는 **depth scaling**, input image의 해상도를 높이는 **resolution scaling**이 있습니다. ResNet ([He et al., 2016](https://arxiv.org/abs/1512.03385))은 depth를 통해 모델을 확장하는 대표적인 모델이며 MobileNet ([Howard et al., 2017](https://arxiv.org/abs/1704.04861))은 width를 조절하여 모델을 확장하는 대표적인 모델입니다. 각각의 차원을 개별적으로 확장하면 모델의 성능이 향상되지만, 모든 차원의 균형을 맞추어 동시에 확장하는 것이 전반적인 성능을 더 잘 향상시킨다는 것을 논문에서 실험으로 보여줍니다. 즉 모델을 확장하기 위해 3가지 차원을 함께 고려하는 **Compound scaling** 방법을 제안합니다.
 
 <img src="\assets\images\EfficientNet\image2.png" />
 
